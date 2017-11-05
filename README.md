@@ -8,11 +8,25 @@ Just add index.php & mp3player into the directory with the music.
 
 You can do that quickly by running this command:
 
-`git init; git remote add origin https://github.com/efossas/DirectoryMusicPlayer; git pull origin master`
+```git init; git remote add origin https://github.com/efossas/DirectoryMusicPlayer; git pull origin master```
 
 If you need to change ownership, run:
 
-`chown -R www-data:www-data index.php mp3player/`
+```chown -R www-data:www-data index.php mp3player/```
+
+## Music
+
+This only works with mp3 files.
+
+If you have ffmpeg, you can use this command to change m4a to mp3:
+
+```for f in *.m4a; do ffmpeg -i "$f" -codec:v copy -codec:a libmp3lame -q:a 2 ./"${f%.m4a}.mp3"; done```
+
+You don't have to, but the player assumes you are naming your files like: `Artist_Name-Song_Name`
+
+You can use this command to replace spaces with underscores in a directory:
+
+```find -name \"* *\" -type f | rename 's/ /_/g'```
 
 ## Usage
 
